@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin-top: 100px;
+        }
+
+        .login-container {
+            max-width: 300px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .bpm-container {
+            display: none;
+        }
+
+        #bpmValue {
+            font-size: 24px;
+            color: #333;
+        }
+
+        #bpmAnimation {
+            font-size: 18px;
+            color: #999;
+            margin-top: 10px;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .pulse-animation {
+            animation: pulse 1s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container" id="loginContainer">
+        <h2>Login</h2>
+        <form id="loginForm" onsubmit="return validateForm()">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <input type="submit" value="Login">
+        </form>
+    </div>
+
+    <div class="bpm-container" id="bpmContainer">
+        <h2>BPM Monitor</h2>
+        <div id="bpmValue" class="pulse-animation"></div>
+        <div id="bpmAnimation" class="pulse-animation">Measuring...</div>
+    </div>
+
+    <script>
+        function validateForm() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+
+            // Check username and password
+            if (username === "Health" && password === "1234") {
+                // Hide login container
+                document.getElementById("loginContainer").style.display = "none";
+
+                // Display BPM container
+                document.getElementById("bpmContainer").style.display = "block";
+
+                // Simulate BPM measurement (replace with actual measurement logic)
+                simulateBPMMeasurement();
+                
+                return false; // Prevent form submission
+            } else {
+                alert("Incorrect username or password. Please try again.");
+                return false;
+            }
+        }
+
+        function simulateBPMMeasurement() {
+            // Simulate BPM measurement and update the display
+            var bpmValueElement = document.getElementById("bpmValue");
+            var bpmAnimationElement = document.getElementById("bpmAnimation");
+
+            // Simulate BPM value (replace with actual BPM measurement logic)
+            var bpmValue = Math.floor(Math.random() * (100 - 60 + 1) + 60);
+
+            // Update BPM value display
+            bpmValueElement.textContent = "BPM: " + bpmValue;
+
+            // Start animation after a delay
+            setTimeout(function() {
+                bpmAnimationElement.textContent = "Measurement complete";
+                bpmValueElement.classList.remove("pulse-animation");
+                bpmAnimationElement.classList.remove("pulse-animation");
+            }, 3000); // Adjust the delay based on your requirements
+        }
+    </script>
+</body>
+</html>
