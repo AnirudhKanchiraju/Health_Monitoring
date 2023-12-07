@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ... (same as before) ... -->
+</head>
+<body>
+    <div id="login-container">
+        <!-- ... (same as before) ... -->
+    </div>
+
+    <script>
+        function login() {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+
+            // Check credentials (this is a basic example, use secure methods in production)
+            if (username === 'Health' && password === '1234') {
+                document.getElementById('login-container').style.display = 'none';
+                document.getElementById('health-monitor').style.display = 'block';
+                // Simulate fetching BPM and Spo2 from Arduino (replace with actual data retrieval)
+                simulateArduinoData();
+            } else {
+                alert('Invalid credentials. Please try again.');
+            }
+        }
+
+        function simulateArduinoData() {
+            // Simulate fetching data from Arduino (replace with actual data retrieval)
+            function getRandomInt(min, max) {
+                return Math.floor(Math.random() * (max - min + 1)) + min;
+            }
+
+            function updateData() {
+                var bpm = getRandomInt(60, 120); // Random BPM between 60 and 120
+                var spo2 = getRandomInt(90, 100); // Random Spo2 between 90 and 100
+
+                document.getElementById('bpm').innerText = bpm;
+                document.getElementById('spo2').innerText = spo2;
+
+                // Call the function recursively for continuous updates
+                setTimeout(updateData, 2000); // Update every 2 seconds
+            }
+
+            // Initial call to start the simulation
+            updateData();
+        }
+    </script>
+</body>
+</html>
